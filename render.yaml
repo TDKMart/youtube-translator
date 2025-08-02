@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: youtube-translator-app
+    env: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: youtube-translator-redis
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    healthCheckPath: /
+    autoDeploy: true
+
+  - type: worker
+    name: youtube-translator-worker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: frankfurt
+    startCommand: celery -A worker worker --loglevel=info
+    envVars:
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: youtube-translator-redis
+
+  - type: redis
+    name: youtube-translator-redis
+    plan: free
