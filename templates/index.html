@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Translation</title>
+    <script src="/static/script.js" defer></script>
+    <style>
+        body { font-family: Arial; text-align: center; margin: 50px; }
+        input, button { padding: 10px; margin: 10px; font-size: 16px; }
+        #progress { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🎙️ Translate a YouTube Video</h1>
+    <form id="translateForm">
+        <input type="text" id="url" placeholder="YouTube Link" required><br>
+        <input type="text" id="target_lang" placeholder="Target language (e.g. fr, es)" required><br>
+        <button type="submit">Translate</button>
+    </form>
+    <div id="progress"></div>
+    <div id="result"></div>
+</body>
+</html>
